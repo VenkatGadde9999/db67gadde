@@ -1,38 +1,38 @@
 extends layout
 
 block content
-  h1= title
-  
-  div(class="container-fluid")
+    h1= title
+    - let railway = results
+    div(class="container-fluid")
         div(class="row")
-            -
-                let railway = [
-                    {
-                        "city": "bangalore",
-                        "destination": "d1",
-                        "cost": "150"                        
-                    },
-                    {
-                        "city": "guntur",
-                        "destination": "d2",                        
-                        "cost": "100"
-                    },
-                    {
-                        "city": "hyd",
-                        "destination": "d3",
-                        "cost": "120"
-                    },                   
-                ]
+            //-
+            //- let railway = [
+            //-     {
+            //-         "city": "bangalore",
+            //-         "destination": "d1",
+            //-         "cost": "150"                        
+            //-     },
+            //-     {
+            //-         "city": "guntur",
+            //-         "destination": "d2",                        
+            //-         "cost": "100"
+            //-     },
+            //-     {
+            //-         "city": "hyd",
+            //-         "destination": "d3",
+            //-         "cost": "120"
+            //-     },                   
+            //- ]
             each rail, pnr in railway  
                 div(class="col-sm-2" onclick=`buy(${pnr})`) #{rail.city}
                 div(class="col-sm-2" ) #{rail.destination}
                 div(class="col-sm-2" ) #{rail.cost}
 
 
-  script.
-     
-       function buy(a)
-       {
-         alert(`You purchased Item ${a+1}`)
-       }
+    script.
+
+        function buy(a)
+        {
+            alert(`You purchased Item ${a+1}`)
+        }
 
