@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1= title
+
+  - let railwayid = toShow._id
+  - let railwaytype = toShow.railwaytype
+  - let railwaycost = toShow.cost
+  - let railwaysize = toShow.size
+  
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{railwayid}
+  - let actionid = "/resource/railways/" + railwayid
+  form(id='railwayForm', action= actionid, method="PUT")
+    div.form-group
+        label.railwayAttr(for='railwaytype') railway type
+        input#railwaytype(type='text', name='railwaytype', value= railwaytype )
+    div.form-group
+        label.railwayAttr(for='size') railway size
+        input#size(type='text', name='size', value= railwaysize )
+    div.form-group
+        label.railwayAttr(for='cost') railway cost
+        input#cost(type='number', name='cost', value= railwaycost )
+    input(type="submit")
+
+  script.
+    document.forms['railwayForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+      });
+    });

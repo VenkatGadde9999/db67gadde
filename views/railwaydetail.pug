@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+
+  - let railwayid = toShow._id
+  - let railwaytype = toShow.railwaytype
+  - let railwaycost = toShow.cost
+  - let railwaysize = toShow.size
+  div
+    div.row
+      div(class='railwayAttr mr-3') railway ID is:
+      div #{railwayid}
+    div.row
+      div(class='railwayAttr mr-3') railway Type is:
+      div #{railwaytype}
+    div.row
+      div(class='railwayAttr mr-3') railway Size is:
+      div #{railwaysize}
+    div.row
+      div(class='railwayAttr mr-3') railway Cost is:
+      div #{railwaycost}

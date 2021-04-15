@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  h1= title
+
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let railwayid = toShow._id
+    - let railwaytype = toShow.railwaytype
+    - let railwaycost = toShow.cost
+    - let railwaysize = toShow.size
+    - let actionid = "/resource/railways/" + railwayid
+    script let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='railwayAttr mr-3') railway ID is:
+        div #{railwayid}
+      div.row
+        div(class='railwayAttr mr-3') railway Type is:
+        div #{railwaytype}
+      div.row
+        div(class='railwayAttr mr-3') railway Size is:
+        div #{railwaysize}
+      div.row
+        div(class='railwayAttr mr-3') railway Cost is:
+        div #{railwaycost}
+
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+  script.
+    function cancel() {
+      // Go back to the home page for the railway collection
+      window.location.href='/railways'
+    }
+  script.
+    function deleteOnid() {
+      console.log("starting delete")
+      // delete first
+      fetch(actionid, {
+        method: 'DELETE'      // Don't need a body for the delete
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Delete succeded")
+        window.location.href='/railways'
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Delete failed " + error )
+      });
+    }
