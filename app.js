@@ -98,19 +98,19 @@ async function recreateDB(){
   // Delete everything
   await railway.deleteMany();
   let instance1 = new railway({city:"bangalore", destination:'d1',
- cost:150});
+ cost:1500});
   instance1.save( function(err,doc) {
   if(err) return console.error(err);
   console.log("First object saved")
   });
   let instance2 = new railway({city:"guntur", destination:'d2',
- cost:100});
+ cost:1001});
   instance2.save( function(err,doc) {
   if(err) return console.error(err);
   console.log("Second object saved")
   });
   let instance3 = new railway({city:"hyd", destination:'d3',
-  cost:120});
+  cost:1200});
   instance3.save( function(err,doc) {
   if(err) return console.error(err);
   console.log("Third object saved")

@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1= title
+  div#errors(style:{display:block;})
 
   form(id='railwayForm', action="/resource/railways", method="POST")
     div.form-group
@@ -23,9 +24,15 @@ block content
         method: 'POST',
         body: new URLSearchParams(new FormData(event.target)) // event.target is the form
       }).then((resp) => {
+        document.getElementById("errors").style.display="block"
         return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
-        alert("Save succeded")
+        if(body.errors){
+          //document.getElementById("errors").innerHTML=`${body.name}  \n ${body.message}\n`;
+          alert("Save Failed"-$[body.message])
+        }else{
+           alert("Save succeded")
+        }
         // TODO handle body
       }).catch((error) => {
         // TODO handle error

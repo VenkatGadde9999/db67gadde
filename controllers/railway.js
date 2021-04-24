@@ -39,7 +39,7 @@ exports.railway_create_post =async function(req, res) {
     }
     catch(err){
         res.status(500);
-        res.send(`{"error": ${err}}`);
+        res.send(err);
         }
     
 };

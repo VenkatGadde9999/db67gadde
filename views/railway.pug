@@ -3,16 +3,35 @@ extends layout
 block content
   h1= title
   - let railway=results;
+  - let destinationcreate = `dispatchCreate(\"/railways/create\")`
   div(class="container-fluid mt-3")
-   div(class="row m-1")
+    button.btn( class="btn-primary ml-1 btn-lg", onclick= destinationcreate) Create
+  div(class="row m-1")
     each rail in railway
-     - let destinations=`buy(\"/railway/update?id=${rail._id}\")`
-     div(class="col-sm-6 bg-primary m-1 p-3") Railway #{rail.city} - #{rail.destination} - #{rail.cost}
-      button.btn( class="btn-success ml-2", onclick=destinations ) Update
+      - let destinationupdate = `dispatch(\"/railways/update?id=${railway._id}\")`
+      - let destinationdetail =   `dispatch(\"/railways/detail?id=${railway._id}\")`
+      - let destinationdelete = `dispatchDelete(\"/railways/delete?id=${railway._id}\")`
+        div(class="col-sm-6 bg-primary m-1 p-3") Railway #{rail.city} - #{rail.destination} - #{rail.cost}
+          button.btn( class="btn-success ml-2", onclick=destinationsupdate  ) Update
+          button.btn( class="btn-info ml-2", onclick=destinationsdetails ) Details
+          button.btn( class="btn-danger ml-2", onclick=destinationsdetails ) Delete
   
-   script.
+  script.
     function buy(path){
         window.location.href=path
 
         
       }
+      function buyUpdate(path){
+        window.location.href=path
+
+        
+      }
+      function buyDelete(path){
+        window.location.href=path
+
+        
+      }
+      
+
+      
